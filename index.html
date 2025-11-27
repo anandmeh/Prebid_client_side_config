@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prebid.js + GAM Test</title>
+    <script src="prebid.js"></script>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+</head>
+<body>
+    <h1>Prebid.js + GAM Test Page</h1>
+
+    <!-- Your GAM ad unit container -->
+    <div id="div-gpt-ad-123456789-0" style="width:300px; height:250px;">
+        <script>
+            window.googletag = window.googletag || {cmd: []};
+            googletag.cmd.push(function() {
+                googletag.defineSlot('/1234567/test-adunit', [300, 250], 'div-gpt-ad-123456789-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        </script>
+    </div>
+
+    <script>
+        // Load your Prebid config
+        fetch('prebid-config.json')
+            .then(response => response.json())
+            .then(config => {
+                // Initialize Prebid
+                pbjs.que.push(function() {
+                    pbjs.addAdUnits(config.adUnits || []); // Assuming your JSON has "adUnits
