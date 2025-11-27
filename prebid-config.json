@@ -1,0 +1,27 @@
+{
+  "version": "10.18.0",
+  "modules": [
+    "appnexusBidAdapter",
+    "criteoBidAdapter",
+    "ixBidAdapter",
+    "openxBidAdapter",
+    "pubmaticBidAdapter",
+    "rubiconBidAdapter",
+    "consentManagementGpp",
+    "consentManagementTcf",
+    "gppControl_usnat",
+    "gppControl_usstates",
+    "gptPreAuction",
+    "storageControl",
+    "tcfControl",
+    "currency",
+    "debugging",
+    "priceFloors",
+    "timeoutRtdProvider",
+    "videoModule",
+    "express",
+    "criteoIdSystem",
+    "id5IdSystem",
+    "sharedIdSystem"
+  ]
+}
