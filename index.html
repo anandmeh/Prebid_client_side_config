@@ -1,31 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Prebid.js + GAM Test</title>
-    <script src="https://raw.githubusercontent.com/anandmeh/Prebid_client_side_config/main/prebid10.18.0.js"></script>
-    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
 </head>
 <body>
-    <h1>Prebid.js + GAM Test Page</h1>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic Example</title>
 
-    <!-- Your GAM ad unit container -->
-    <div id="div-gpt-ad-123456789-0" style="width:300px; height:250px;">
-        <script>
-            window.googletag = window.googletag || {cmd: []};
-            googletag.cmd.push(function() {
-                googletag.defineSlot('/1234567/test-adunit', [300, 250], 'div-gpt-ad-123456789-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.enableServices();
-            });
-        </script>
-    </div>
+    <!-- required scripts -->
+    <script async src="https://cdn.jsdelivr.net/npm/prebid.js@latest/dist/not-for-prod/prebid.js"></script>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    
+  </head>
+  <body>
+  
+  <!-- javascript -->
+  <script>
+var sizes = [
+  [300, 250]
+];
+var PREBID_TIMEOUT = 700;
 
-    <script>
-        // Load your Prebid config
-        fetch('https://raw.githubusercontent.com/anandmeh/Prebid_client_side_config/main/prebid-config.json')
-            .then(response => response.json())
-            .then(config => {
-                // Initialize Prebid
-                pbjs.que.push(function() {
-                    pbjs.addAdUnits(config.adUnits || []); // Assuming your JSON has "adUnits
+var adUnits = [{
+  code: '/19968336/header-bid-tag-1',
+  mediaTypes: {
+    banner: {
+      sizes: sizes
+    }
+  },
+  bids: [{
+    bidder: 'appnexus',
+    params: {
+      placementId: 'XXXXXXX' //not used in prod
+    }
+  }]
+}];
+
+// ======== DO NOT EDIT BELOW THIS LINE =========== //
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+googletag.cmd.push(function() {
+  googletag.pubads().disableInitialLoad();
+});
+
+var pbjs = pbjs || {};
+pbjs.que = pbjs.que || [];
+
+pbjs.que.push(function() {
+  pbjs.addAdUnits(adUnits);
+  pbjs.requestBids({
+    bidsBackHandler: initAdserver
+  });
+});
+
+function initAdserver() {
+  if (pbjs.initAdserverSet) return;
+  pbjs.initAdserverSet = true;
+  googletag.cmd.push(function() {
+    if (pbjs.libLoaded) {
+      pbjs.que.push(function() {
+        pbjs.setTargetingForGPTAsync();
+        googletag.pubads().refresh();
+      });
+    } else {
+      googletag.pubads().refresh();
+    }
+  });
+}
+
+setTimeout(function() {
+  initAdserver();
+}, PREBID_TIMEOUT);
+
+googletag.cmd.push(function() {
+  googletag.defineSlot('/19968336/header-bid-tag-1', sizes, 'div-1')
+    .addService(googletag.pubads());
+  googletag.pubads().enableSingleRequest();
+  googletag.enableServices();
+});
+</script>
+
+  <!-- html -->
+  
+<!-- DO NOT add this script in prod -->
+<script src="intercept-banner-not-for-prod.js" ></script>
+<!-- END -->
+
+<h5>Div-1</h5>
+<div id='div-1' style="min-height:250px;">
+  <script type='text/javascript'>
+    googletag.cmd.push(function() {
+      googletag.display('div-1');
+    });
+  </script>
+</div>
+
+  </body>
+</html>
+    
+</body>
+</html>
