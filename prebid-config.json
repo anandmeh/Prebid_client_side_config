@@ -1,27 +1,256 @@
 {
   "version": "10.18.0",
   "modules": [
+    "msftBidAdapter",
     "appnexusBidAdapter",
-    "criteoBidAdapter",
-    "ixBidAdapter",
-    "openxBidAdapter",
     "pubmaticBidAdapter",
     "rubiconBidAdapter",
     "consentManagementGpp",
     "consentManagementTcf",
-    "gppControl_usnat",
-    "gppControl_usstates",
-    "gptPreAuction",
     "storageControl",
     "tcfControl",
-    "currency",
-    "debugging",
-    "priceFloors",
-    "timeoutRtdProvider",
-    "videoModule",
-    "express",
-    "criteoIdSystem",
+    "schain",
     "id5IdSystem",
-    "sharedIdSystem"
+    "pairIdSystem",
+    "sharedIdSystem",
+    "unifiedIdSystem"
+  ],
+  "globalConfig": {
+    "debug": true,
+    "bidderTimeout": 3000,
+    "priceGranularity": "auto",
+    "enableSendAllBids": true,
+    "useBidCache": true
+  },
+  "consentManagement": {
+    "gdpr": {
+      "cmpApi": "iab",
+      "timeout": 5000,
+      "defaultGdprScope": true,
+      "allowAuctionWithoutConsent": false,
+      "usp": {
+        "cmpApi": "iab",
+        "timeout": 1000
+      }
+    },
+    "usp": {
+      "cmpApi": "iab",
+      "timeout": 1000
+    }
+  },
+  "userSync": {
+    "auctionDelay": 0,
+    "syncDelay": 1000,
+    "syncEnabled": true,
+    "syncsPerBidder": 5,
+    "filterSettings": {
+      "iframe": {
+        "bidders": "*",
+        "filter": "include"
+      },
+      "image": {
+        "bidders": "*",
+        "filter": "include"
+      }
+    },
+    "userIds": [
+      {
+        "name": "sharedId",
+        "storage": {
+          "expires": 60,
+          "name": "_sharedid",
+          "type": "cookie"
+        }
+      },
+      {
+        "name": "criteo"
+      },
+      {
+        "name": "id5Id",
+        "params": {
+          "partner": 42342343
+        },
+        "storage": {
+          "type": "html5",
+          "name": "id5id",
+          "expires": 90,
+          "refreshInSeconds": 28800
+        }
+      },
+      {
+        "name": "unifiedId",
+        "params": {
+          "url": "//match.adsrvr.org/track/rid?ttd_pid=az&fmt=json"
+        },
+        "storage": {
+          "type": "cookie",
+          "name": "pbjs-unifiedid",
+          "expires": 60
+        }
+      }
+    ]
+  },
+  "schain": {
+    "validation": "relaxed",
+    "config": {
+      "ver": "1.0",
+      "complete": 1,
+      "nodes": [
+        {
+          "asi": "your-domain.com",
+          "sid": "00001",
+          "hp": 1
+        }
+      ]
+    }
+  },
+  "mediaTypes": {
+    "banner": {
+      "standard": {
+        "sizes": [
+          [
+            300,
+            250
+          ],
+          [
+            300,
+            600
+          ]
+        ]
+      },
+      "mobile": {
+        "sizes": [
+          [
+            300,
+            250
+          ],
+          [
+            320,
+            50
+          ],
+          [
+            300,
+            50
+          ]
+        ]
+      },
+      "leaderboard": {
+        "sizes": [
+          [
+            728,
+            90
+          ],
+          [
+            970,
+            90
+          ],
+          [
+            970,
+            250
+          ]
+        ]
+      }
+    }
+  },
+  "adUnits": [
+    {
+      "code": "div-banner-ad-1",
+      "mediaTypesRef": "banner.standard",
+      "bids": [
+        {
+          "bidder": "pubmatic",
+          "params": {
+            "publisherId": "156276",
+            "adSlot": "banner_top"
+          }
+        },
+        {
+          "bidder": "msft",
+          "params": {
+            "placement_id": "126332"
+          }
+        },
+        {
+          "bidder": "appnexus",
+          "params": {
+            "placement_id": "XXXXXXX"
+          }
+        },
+        {
+          "bidder": "rubicon",
+          "params": {
+            "accountId": 45625,
+            "siteId": 56464,
+            "zoneId": 65421
+          }
+        }
+      ]
+    },
+    {
+      "code": "div-banner-ad-2",
+      "mediaTypesRef": "banner.standard",
+      "bids": [
+        {
+          "bidder": "pubmatic",
+          "params": {
+            "publisherId": "156276",
+            "adSlot": "banner_sidebar"
+          }
+        },
+        {
+          "bidder": "appnexus",
+          "params": {
+            "placement_id": "XXXXXXX"
+          }
+        },
+        {
+          "bidder": "msft",
+          "params": {
+            "placement_id": "126332"
+          }
+        },
+        {
+          "bidder": "rubicon",
+          "params": {
+            "accountId": 45625,
+            "siteId": 56464,
+            "zoneId": 65421
+          }
+        }
+      ]
+    },
+    {
+      "code": "div-leaderboard",
+      "mediaTypesRef": "banner.leaderboard",
+      "bids": [
+        {
+          "bidder": "pubmatic",
+          "params": {
+            "publisherId": "156276",
+            "adSlot": "leaderboard"
+          }
+        },
+        {
+          "bidder": "appnexus",
+          "params": {
+            "placement_id": "XXXXXXX"
+          }
+        },
+        {
+          "bidder": "msft",
+          "params": {
+            "placement_id": "126332"
+          }
+        },
+        {
+          "bidder": "rubicon",
+          "params": {
+            "accountId": 45625,
+            "siteId": 56464,
+            "zoneId": 65421
+          }
+        }
+      ]
+    }
   ]
 }
