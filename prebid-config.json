@@ -173,7 +173,7 @@
         {
           "bidder": "appnexus",
           "params": {
-            "placement_id": "XXXXXXX"
+            "placementId": "XXXXXXX"
           }
         },
         {
