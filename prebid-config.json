@@ -17,7 +17,7 @@
   ],
   "globalConfig": {
     "debug": true,
-    "bidderTimeout": 3000,
+    "bidderTimeout": 10000,
     "priceGranularity": "auto",
     "enableSendAllBids": true,
     "useBidCache": true
